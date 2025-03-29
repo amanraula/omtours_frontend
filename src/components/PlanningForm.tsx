@@ -69,27 +69,12 @@ const PlanningForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/api/generate-plan', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to generate travel plan');
-      }
-
-      const data = await response.json();
-      setTravelPlan(data);
+      const response = await axios.post('http://localhost:5000/plan', formData);
+      console.log('Success:', response.data);
     } catch (error) {
-      console.error('Error:', error);
-      setError(error instanceof Error ? error.message : 'An unexpected error occurred');
-    } finally {
-      setIsLoading(false);
+      console.error('Error submitting form:', error);
     }
+
   };
 
   const handleLocationPreferenceChange = (location: string) => {
