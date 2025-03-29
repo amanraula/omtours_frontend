@@ -1,10 +1,12 @@
 import React, { JSX, useRef } from 'react';
 import { Routes, Route, useNavigate, NavigateFunction } from 'react-router-dom';
-import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Map, Calendar, RefreshCw, Quote } from 'lucide-react';
+import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Map, Calendar, RefreshCw, Quote, MapPin } from 'lucide-react';
 import PlanningForm from './components/PlanningForm';
+import LocationView from './pages/LocationView';
+import ErrorPage from './pages/ErrorPage';
 
-interface TopPlace {
-  name: string;
+interface Categories {
+  category: string;
   image: string;
   description: string;
 }
@@ -45,13 +47,17 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<HomePage navigate={navigate} />} />
       <Route path="/plan" element={<PlanningForm />} />
+      <Route path="/location" element={<LocationView />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
 
 function HomePage({ navigate }: HomePageProps): JSX.Element {
-  const topPlacesRef = useRef<HTMLDivElement | null>(null);
-  const reviewsRef = useRef<HTMLDivElement | null>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const reviewsRef = useRef<HTMLDivElement>(null);
+  const internationalRef = useRef<HTMLDivElement>(null);
+  const domesticRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right', ref: React.RefObject<HTMLDivElement | null>): void => {
       const container = ref.current;
@@ -61,34 +67,80 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       }
     };
 
-  const topPlaces: TopPlace[] = [
+  const internationalDestinations = [
     {
-      name: "Santorini, Greece",
+      name: "France",
+      image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80",
+      description: "Experience the romance of Paris and the French Riviera"
+    },
+    {
+      name: "Japan",
+      image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80",
+      description: "Ancient traditions meet modern technology"
+    },
+    {
+      name: "Italy",
+      image: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&q=80",
+      description: "Art, history, and culinary excellence"
+    },
+    {
+      name: "Switzerland",
+      image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80",
+      description: "Alpine beauty and pristine landscapes"
+    }
+  ];
+
+  const indianStates = [
+    {
+      name: "Rajasthan",
+      image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&q=80",
+      description: "Land of Kings and majestic forts"
+    },
+    {
+      name: "Kerala",
+      image: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&q=80",
+      description: "God's Own Country with serene backwaters"
+    },
+    {
+      name: "Himachal Pradesh",
+      image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&q=80",
+      description: "Himalayan beauty and adventure"
+    },
+    {
+      name: "Goa",
+      image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&q=80",
+      description: "Beaches, culture, and vibrant nightlife"
+    }
+  ];
+
+  const categories: Categories[] = [
+    {
+      category: "Old City",
       image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&q=80",
       description: "Iconic white-washed buildings and stunning sunsets"
     },
     {
-      name: "Machu Picchu, Peru",
+      category: "Historical",
       image: "https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&q=80",
       description: "Ancient Incan citadel in the Andes Mountains"
     },
     {
-      name: "Kyoto, Japan",
+      category: "Japanese Culture",
       image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80",
       description: "Traditional temples and beautiful cherry blossoms"
     },
     {
-      name: "Maldives",
+      category: "Beaches",
       image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&q=80",
       description: "Crystal clear waters and overwater bungalows"
     },
     {
-      name: "Swiss Alps",
+      category: "Mountains & Valleys",
       image: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80",
       description: "Majestic mountains and scenic hiking trails"
     },
     {
-      name: "Bali, Indonesia",
+      category: "Island",
       image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80",
       description: "Tropical paradise with rich culture and beaches"
     }
@@ -157,27 +209,143 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
         </div>
       </header>
 
-      {/* Top Places Section */}
+      {/* International Destinations Section */}
       <section className="py-20 px-4 relative">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-            Top Destinations to Explore
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">
+            Top Places Outside India
           </h2>
+          <p className="text-xl text-center text-gray-600 mb-12">
+            Discover breathtaking destinations around the world
+          </p>
           
           <div className="relative group">
             <button 
-              onClick={() => scroll('left', topPlacesRef)}
+              onClick={() => scroll('left', internationalRef)}
               className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <ChevronLeft className="w-6 h-6 text-gray-600" />
             </button>
             
             <div 
-              ref={topPlacesRef}
+              ref={internationalRef}
               className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide scroll-smooth"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {topPlaces.map((place, index) => (
+              {internationalDestinations.map((destination) => (
+                <div 
+                  key={destination.name}
+                  onClick={() => navigate(`/location?country=${destination.name}`)}
+                  className="flex-none w-80 group/card cursor-pointer"
+                >
+                  <div className="relative h-64 rounded-xl overflow-hidden">
+                    <img 
+                      src={destination.image} 
+                      alt={destination.name}
+                      className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Globe2 className="w-5 h-5 text-sky-400" />
+                        <h3 className="text-xl font-bold text-white">{destination.name}</h3>
+                      </div>
+                      <p className="text-sm text-gray-200">{destination.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <button 
+              onClick={() => scroll('right', internationalRef)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-600" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Indian States Section */}
+      <section className="py-20 px-4 relative bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">
+            Explore India
+          </h2>
+          <p className="text-xl text-center text-gray-600 mb-12">
+            Discover the diverse beauty of incredible India
+          </p>
+          
+          <div className="relative group">
+            <button 
+              onClick={() => scroll('left', domesticRef)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-600" />
+            </button>
+            
+            <div 
+              ref={domesticRef}
+              className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {indianStates.map((state) => (
+                <div 
+                  key={state.name}
+                  onClick={() => navigate(`/location?state=${state.name}`)}
+                  className="flex-none w-80 group/card cursor-pointer"
+                >
+                  <div className="relative h-64 rounded-xl overflow-hidden">
+                    <img 
+                      src={state.image} 
+                      alt={state.name}
+                      className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="flex items-center gap-2 mb-2">
+                        <MapPin className="w-5 h-5 text-sky-400" />
+                        <h3 className="text-xl font-bold text-white">{state.name}</h3>
+                      </div>
+                      <p className="text-sm text-gray-200">{state.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <button 
+              onClick={() => scroll('right', domesticRef)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-600" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Top Places Section */}
+      <section className="py-20 px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+            Categories of Top Places
+          </h2>
+          
+          <div className="relative group">
+            <button 
+              onClick={() => scroll('left', categoriesRef)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-600" />
+            </button>
+            
+            <div 
+              ref={categoriesRef}
+              className="flex overflow-x-auto gap-6 pb-8 scrollbar-hide scroll-smooth"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {categories.map((place, index) => (
                 <div 
                   key={index}
                   className="flex-none w-80 group/card"
@@ -185,12 +353,12 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
                   <div className="relative h-64 rounded-xl overflow-hidden">
                     <img 
                       src={place.image} 
-                      alt={place.name}
+                      alt={place.category}
                       className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-xl font-bold text-white mb-2">{place.name}</h3>
+                      <h3 className="text-xl font-bold text-white mb-2">{place.category}</h3>
                       <p className="text-sm text-gray-200">{place.description}</p>
                     </div>
                   </div>
@@ -199,7 +367,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             </div>
             
             <button 
-              onClick={() => scroll('right', topPlacesRef)}
+              onClick={() => scroll('right', categoriesRef)}
               className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
             >
               <ChevronRight className="w-6 h-6 text-gray-600" />
