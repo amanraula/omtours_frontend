@@ -70,13 +70,13 @@ const PlanningForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:8000/gemini/generate', formData);
+      const response = await axios.post('http://localhost:8000/plan', formData);
       console.log('Success:', response.data);
-      navigate('/tour');
     } catch (error) {
       console.error('Error submitting form:', error);
     }
 
+    navigate('/tour');
   };
 
   const handleLocationPreferenceChange = (location: string) => {
