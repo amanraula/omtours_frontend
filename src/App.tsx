@@ -1,9 +1,10 @@
 import React, { JSX, useRef } from 'react';
 import { Routes, Route, useNavigate, NavigateFunction } from 'react-router-dom';
 import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Map, Calendar, RefreshCw, Quote, MapPin } from 'lucide-react';
-import PlanningForm from './components/PlanningForm';
+import PlanningForm from './pages/PlanningForm';
 import LocationView from './pages/LocationView';
 import ErrorPage from './pages/ErrorPage';
+import TourPage from './pages/TourPage';
 
 interface Categories {
   category: string;
@@ -47,6 +48,7 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<HomePage navigate={navigate} />} />
       <Route path="/plan" element={<PlanningForm />} />
+      <Route path='/tour' element={<TourPage />} />
       <Route path="/location" element={<LocationView />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

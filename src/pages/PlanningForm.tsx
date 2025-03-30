@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Globe2, ArrowLeft, Loader2, IndianRupee } from 'lucide-react';
+import axios from 'axios';
 
 interface FormData {
   source: string;
@@ -69,8 +70,9 @@ const PlanningForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/plan', formData);
+      const response = await axios.post('http://localhost:8000/gemini/generate', formData);
       console.log('Success:', response.data);
+      navigate('/tour');
     } catch (error) {
       console.error('Error submitting form:', error);
     }

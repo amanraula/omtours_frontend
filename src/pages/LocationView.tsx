@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ChevronRight, MapPin, Globe2, Home } from 'lucide-react';
-import ErrorPage from '../pages/ErrorPage';
+import ErrorPage from './ErrorPage';
 
 interface Location {
   name: string;
