@@ -70,7 +70,8 @@ const PlanningForm: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:8000/plan', formData);
+      // const response = await axios.post('http://localhost:8000/plan', formData);
+      const response = await axios.post('https://omtours-be.onrender.com/plan', formData);
       console.log('Success:', response.data);
     } catch (error) {
       console.error('Error submitting form:', error);

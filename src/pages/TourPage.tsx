@@ -46,7 +46,9 @@ function TourPage() {
       useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8000/gemini/responses");
+                const response = await axios.get("https://omtours-be.onrender.com/gemini/responses");
+                
+                // const response = await axios.get("https://omtours-be.onrender.com/gemini/responses");
                 let rawData = (response.data as string).trim();
                 if (rawData.startsWith("```json")) {
                     rawData = rawData.replace(/^```json\n/, "").replace(/\n```$/, "");
@@ -87,7 +89,7 @@ function TourPage() {
 
     try {
       setRegenerating(true);
-      const response = await axios.post<Block>("http://localhost:8000/gemini/regenerate", {
+      const response = await axios.post<Block>("https://omtours-be.onrender.com/gemini/regenerate", {
         previousBlocks: selectedBlocks,
         date: currentDay.date,
         time: currentBlock.time,
