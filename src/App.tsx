@@ -189,7 +189,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       <header className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="public\space.png"
+            src="\space.png"
             alt="Beautiful landscape"
             className="w-full h-full object-cover"
             style={{ transform: 'translateX(-200px) scale(1.4)' }}
