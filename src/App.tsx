@@ -194,7 +194,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             className="w-full h-full object-cover"
             style={{ transform: 'translateX(-200px) scale(1.4)' }}
           />
-          <div className="absolute inset-0 bg-red bg-opacity-50"></div>
+          <div className="absolute inset-0  bg-opacity-100"></div>
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
