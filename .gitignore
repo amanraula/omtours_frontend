@@ -1,5 +1,4 @@
 # Logs
-#test update
 logs
 *.log
 npm-debug.log*
@@ -24,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-node_modules/
+node_modules

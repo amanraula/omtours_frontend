@@ -41,7 +41,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
         </div>
 
         <div className="text-sm text-gray-500">
-          <p>Need assistance? <a href="mailto:support@omtours.com" className="text-sky-600 hover:text-sky-700">Contact our support team</a></p>
+          <p>Need assistance? <a href="mailto:amanraula2005@gmail.com" className="text-sky-600 hover:text-sky-700">Contact our support team</a></p>
         </div>
       </div>
     </div>

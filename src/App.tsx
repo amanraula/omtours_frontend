@@ -189,11 +189,12 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       <header className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80"
+            src="public\space.png"
             alt="Beautiful landscape"
             className="w-full h-full object-cover"
+            style={{ transform: 'translateX(-200px) scale(1.4)' }}
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute inset-0 bg-red bg-opacity-50"></div>
         </div>
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
