@@ -188,7 +188,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       trip: "Kerala Backwaters"
     }
   ];
-  const { user, isCheckingAuth,authCheck,logout,login} = useAuthStore();
+  const { user, isCheckingAuth,authCheck,logout} = useAuthStore();
 
         React.useEffect(() => {
           authCheck();
