@@ -1,8 +1,8 @@
   import axios from "axios";
   import toast from "react-hot-toast";
   import { create } from "zustand";
-axios.defaults.baseURL = "http://localhost:8000"; // Your backend URL
-  // axios.defaults.baseURL ="https://omtours-be.onrender.com";
+// axios.defaults.baseURL = "http://localhost:8000"; // Your backend URL
+  axios.defaults.baseURL ="https://omtours-be.onrender.com";
   axios.defaults.withCredentials = true; 
   // Define User and Credentials types
   
