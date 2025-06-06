@@ -6,6 +6,10 @@ import LocationView from './pages/LocationView';
 import ErrorPage from './pages/ErrorPage';
 import TourPage from './pages/TourPage';
 
+import { useAuthStore } from './store/authUser';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
+
 interface Categories {
   category: string;
   image: string;
@@ -51,6 +55,8 @@ function App(): JSX.Element {
       <Route path='/tour' element={<TourPage />} />
       <Route path="/location" element={<LocationView />} />
       <Route path="*" element={<ErrorPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   );
 }
@@ -182,7 +188,21 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       trip: "Kerala Backwaters"
     }
   ];
+  const { user, isCheckingAuth,authCheck,logout,login} = useAuthStore();
 
+        React.useEffect(() => {
+          authCheck();
+        }, [authCheck]);
+    //  const  isCheckingAuth=true;
+        if (isCheckingAuth) {
+          return (
+            <div className="min-h-screen bg-indigo-950 flex items-center justify-center">
+              <div className="animate-pulse text-lg font-medium text-white">
+                Authenticating Please Wait ...
+              </div>
+            </div>
+          );
+        }
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       {/* Hero Section */}
@@ -211,6 +231,40 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
           </button>
         </div>
       </header>
+    {/* Top-right controls */}
+      <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
+  {user ? (
+    <>
+      <img
+        src="/avatar2.png"
+        alt="User Avatar"
+        className="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+        title="Account"
+      />
+      <button
+        className="text-yellow-400 hover:text-red-500 font-bold text-lg transition-colors"
+        onClick={logout}
+      >
+        LogOut
+      </button>
+    </>
+  ) : (
+    <>
+      <a
+        href="/signup"
+        className="text-green-600 font-bold text-lg cursor-pointer hover:text-red-800 transition-colors"
+      >
+        Sign Up
+      </a>
+      <a
+        href="/login"
+        className="text-green-600 font-bold text-lg cursor-pointer hover:text-red-800 transition-colors"
+      >
+        LogIn
+      </a>
+    </>
+  )}
+</div>
 
       {/* International Destinations Section */}
       <section className="py-20 px-4 relative">
