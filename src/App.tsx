@@ -1,4 +1,4 @@
-import React, { JSX, useRef } from 'react';
+import React, { JSX, useRef,useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, NavigateFunction } from 'react-router-dom';
 import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Map, Calendar, RefreshCw, Quote, MapPin } from 'lucide-react';
 import PlanningForm from './pages/PlanningForm';
@@ -46,6 +46,8 @@ interface HomePageProps {
 }
 
 function App(): JSX.Element {
+  
+  
   const navigate = useNavigate();
 
   return (
@@ -188,6 +190,8 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       trip: "Kerala Backwaters"
     }
   ];
+  
+
   const { user, isCheckingAuth,authCheck,logout} = useAuthStore();
 
         React.useEffect(() => {
@@ -203,6 +207,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             </div>
           );
         }
+ 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       {/* Hero Section */}
@@ -247,8 +252,8 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
         </div>
       </header>
     {/* Top-right controls */}
-      <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
-  {user ? (
+    <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
+      {user ? (
     <>
       <div className="flex items-center gap-6">
       {/* starttick */}
@@ -282,6 +287,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
     </>
   ) : (
     <>
+      
       <a
         href="/signup"
         className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"

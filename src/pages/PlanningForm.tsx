@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Globe2, ArrowLeft, Loader2, IndianRupee } from 'lucide-react';
 import axios from 'axios';
 
+import { useAuthStore } from '../store/authUser';
 interface FormData {
   source: string;
   destination: string;
@@ -105,9 +106,65 @@ const PlanningForm: React.FC = () => {
       maximumFractionDigits: 0,
     }).format(value);
   };
+// Check user authentication
+const { user,authCheck,logout} = useAuthStore();
 
+        React.useEffect(() => {
+          authCheck();
+        }, [authCheck]);
+    
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
+      {/* Top-right controls */}
+    <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
+      {user ? (
+    <>
+      <div className="flex items-center gap-6">
+      {/* starttick */}
+       <div className="flex flex-col items-center">
+        <img
+          src="../startick.png"
+          alt="Verified"
+          className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+          title="SucceessFull Authenticated"
+        />
+      </div>
+      {/* Avatar + Username */}
+      <div className="flex flex-col items-center">
+        <img
+          src="/avatar2.png"
+          alt="User Avatar"
+          className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+          title="Account"
+        />
+      </div> 
+       {/* Logout Button */}
+      <button
+        className="text-yellow-400 hover:text-red-500 font-bold text-xl transition-colors"
+        onClick={logout}
+      >
+        LogOut
+      </button>
+      </div>       
+    </>
+  ) : (
+    <>
+      
+      <a
+        href="/signup"
+        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
+      >
+        Sign Up
+      </a>
+      <a
+        href="/login"
+        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
+      >
+        LogIn
+      </a>
+    </>
+  )}
+</div>
       <nav className="bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
