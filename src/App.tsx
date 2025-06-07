@@ -237,6 +237,14 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             Plan Your Adventure
           </button>
         </div>
+        <div className="absolute   bottom-4 text-blue-300 right-4 z-50 flex items-center gap-6">
+          <img
+          src="/explore.png"
+          alt="Explore"
+          className="w-25 h-19 "
+          title="Explore More"
+        />
+        </div>
       </header>
     {/* Top-right controls */}
       <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
