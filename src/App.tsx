@@ -209,13 +209,20 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       <header className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="\space.png"
+            src="/space.png"
             alt="Beautiful landscape"
-            className="w-full h-full object-cover"
-            style={{ transform: 'translateX(-200px) scale(1.4)' }}
+            className="
+              w-full h-full object-cover
+              transform
+              -translate-x-0 scale-100
+              sm:-translate-x-20 sm:scale-110
+              md:-translate-x-32 md:scale-125
+              lg:-translate-x-48 lg:scale-140
+            "
           />
-          <div className="absolute inset-0  bg-opacity-100"></div>
+          <div className="absolute inset-0 bg-opacity-100"></div>
         </div>
+
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-6xl font-bold text-white mb-6">
@@ -235,30 +242,47 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
   {user ? (
     <>
-      <img
-        src="/avatar2.png"
-        alt="User Avatar"
-        className="w-10 h-10 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
-        title="Account"
-      />
+      <div className="flex items-center gap-6">
+      {/* starttick */}
+       <div className="flex flex-col items-center">
+        <img
+          src="/startick.png"
+          alt="Verified"
+          className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+          title="SucceessFull Authenticated"
+        />
+      </div>
+      {/* Avatar + Username */}
+      <div className="flex flex-col items-center">
+        <img
+          src="/avatar2.png"
+          alt="User Avatar"
+          className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
+          title="Account"
+        />
+      </div>
+
+      {/* Logout Button */}
       <button
-        className="text-yellow-400 hover:text-red-500 font-bold text-lg transition-colors"
+        className="text-yellow-400 hover:text-red-500 font-bold text-xl transition-colors"
         onClick={logout}
       >
         LogOut
       </button>
+      </div>  
+      
     </>
   ) : (
     <>
       <a
         href="/signup"
-        className="text-green-600 font-bold text-lg cursor-pointer hover:text-red-800 transition-colors"
+        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
       >
         Sign Up
       </a>
       <a
         href="/login"
-        className="text-green-600 font-bold text-lg cursor-pointer hover:text-red-800 transition-colors"
+        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
       >
         LogIn
       </a>
