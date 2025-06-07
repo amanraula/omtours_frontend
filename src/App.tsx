@@ -268,7 +268,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       {/* Avatar + Username */}
       <div className="flex flex-col items-center">
         <img
-          src="/avatar2.png"
+          src={user.image}
           alt="User Avatar"
           className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
           title="Account"

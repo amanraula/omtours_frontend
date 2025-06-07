@@ -10,6 +10,7 @@
     id: string;
     username: string;
     email: string;
+    image?: string; // Optional image field
   };
 
   type Credentials = {
@@ -26,7 +27,7 @@
     isLoggingIn: boolean;
     signup: (credentials: Credentials) => Promise<void>;
     authCheck: () => Promise<void>;
-     logout: () => Promise<void>; // Added logout
+    logout: () => Promise<void>; // Added logout
     login: (credentials: Credentials) => Promise<void>;
   }
 

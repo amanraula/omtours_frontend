@@ -112,7 +112,8 @@ const { user,authCheck,logout} = useAuthStore();
         React.useEffect(() => {
           authCheck();
         }, [authCheck]);
-    
+let name = "Guest";//null
+if (user) { name=user.username;} 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       {/* Top-right controls */}
@@ -184,7 +185,7 @@ const { user,authCheck,logout} = useAuthStore();
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">Plan Your Dream Journey</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">Plan Your Dream Journey - {name}</h1>
         
         {error && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
