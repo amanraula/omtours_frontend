@@ -11,12 +11,14 @@
     username: string;
     email: string;
     image?: string; // Optional image field
+    searchHistory?: string[]; // Optional search history field
   };
 
   type Credentials = {
     username?: string;// making optional so ,login
     email: string;
     password: string;
+
   };
 
   interface AuthState {

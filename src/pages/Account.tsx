@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Moon, Sun, Trash2, MapPin } from 'lucide-react';
-import { useAuthStore } from '../store/authUser'; // Add this import
+import { useAuthStore } from '../store/authUser';
 
 const Account: React.FC = () => {
   const { user: authUser, authCheck, logout } = useAuthStore();
@@ -24,23 +24,19 @@ const Account: React.FC = () => {
 
   const displayUser = {
     image: authUser.image,
-    username: authUser.username ,
+    username: authUser.username,
     email: authUser.email,
-    //searchHistory: authUser.searchHistory || []
-     searchHistory: ['sample1', 'sample2', 'sample3'] // Placeholder for search history,
+    searchHistory: authUser.searchHistory || [],
   };
 
   const handleDeleteAccount = () => {
     if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      // Handle account deletion logic here
       console.log('Account deletion requested');
-      logout(); // Call logout from auth store
+      logout();
     }
   };
 
   const handleDeletePlace = (index: number) => {
-    // This would need to be implemented in your auth store
-    // For now, just show a message
     console.log(`Delete place at index ${index}: ${displayUser.searchHistory[index]}`);
     // You would call something like: updateUserSearchHistory(displayUser.searchHistory.filter((_, i) => i !== index))
   };
@@ -162,69 +158,72 @@ const Account: React.FC = () => {
 
               {/* Places Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {displayUser.searchHistory.map((place: string, index: number) => (
-                  <div
-                    key={index}
-                    className={`group relative p-4 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 ${
-                      isDarkMode
-                        ? 'bg-slate-700/50 border-purple-400/30 hover:bg-slate-700/70 hover:border-purple-400/50'
-                        : 'bg-white/60 border-blue-200/40 hover:bg-white/80 hover:border-blue-300/60'
-                    } backdrop-blur-sm shadow-lg hover:shadow-xl`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg ${
+                {displayUser.searchHistory && displayUser.searchHistory.length > 0 ? (
+                  displayUser.searchHistory.map((place: any, index: number) => {
+                    // Handle both string and object formats
+                    const placeName = typeof place === 'string' ? place : place?.name || place?.city || place?.location || 'Unknown Location';
+                    
+                    return (
+                      <div
+                        key={index}
+                        className={`group relative p-4 rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer border-2 backdrop-blur-sm shadow-lg hover:shadow-xl ${
                           isDarkMode
-                            ? 'bg-purple-500/20 text-purple-300'
-                            : 'bg-blue-100 text-blue-600'
-                        }`}>
-                          <MapPin size={16} />
-                        </div>
-                        <span className={`font-medium ${
-                          isDarkMode ? 'text-white' : 'text-gray-800'
-                        }`}>
-                          {place}
-                        </span>
-                      </div>
-                      
-                      <button
-                        onClick={() => handleDeletePlace(index)}
-                        className={`opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-2 rounded-lg hover:scale-110 ${
-                          isDarkMode
-                            ? 'text-red-400 hover:bg-red-500/20'
-                            : 'text-red-500 hover:bg-red-100'
+                            ? 'bg-slate-700/60 border-purple-400/40 hover:bg-slate-700/80 hover:border-purple-300/60'
+                            : 'bg-white/60 border-blue-200/40 hover:bg-white/80 hover:border-blue-300/60'
                         }`}
                       >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className={`p-2 rounded-lg ${
+                              isDarkMode ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-100 text-blue-600'
+                            }`}>
+                              <MapPin size={16} />
+                            </div>
+                            <span className={`font-medium ${
+                              isDarkMode ? 'text-white' : 'text-gray-800'
+                            }`}>
+                              {placeName}
+                            </span>
+                          </div>
+                          
+                          <button
+                            onClick={() => handleDeletePlace(index)}
+                            className={`p-2 rounded-lg hover:scale-110 transition-transform duration-200 ${
+                              isDarkMode
+                                ? 'text-red-400 hover:bg-red-500/20'
+                                : 'text-red-500 hover:bg-red-100'
+                            }`}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className={`col-span-full text-center py-12 ${
+                    isDarkMode ? 'text-purple-300' : 'text-blue-600'
+                  }`}>
+                    <MapPin size={48} className="mx-auto mb-4 opacity-50" />
+                    <p className="text-lg">No places in your search history yet</p>
+                    <p className="text-sm opacity-75 mt-2">Start exploring to see your familiar places here</p>
                   </div>
-                ))}
+                )}
               </div>
-
-              {displayUser.searchHistory.length === 0 && (
-                <div className={`text-center py-12 ${
-                  isDarkMode ? 'text-purple-300' : 'text-blue-600'
-                }`}>
-                  <MapPin size={48} className="mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">No places in your search history yet</p>
-                  <p className="text-sm opacity-75 mt-2">Start exploring to see your familiar places here</p>
-                </div>
-                
-              )}
             </div>
-            <a
-  href="https://github.com/amanraula"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="fixed bottom-4 right-4 z-50 text-blue-400 hover:text-blue-600 font-semibold text-sm shadow-sm bg-white/80 rounded px-3 py-1"
->
-  Github-Aman
-</a>
-
           </div>
         </div>
       </div>
+
+      {/* GitHub Link */}
+      <a
+        href="https://github.com/amanraula"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-4 right-4 z-50 text-blue-400 hover:text-blue-600 font-semibold text-sm shadow-sm bg-white/80 rounded px-3 py-1"
+      >
+        Github-Aman
+      </a>
     </div>
   );
 };

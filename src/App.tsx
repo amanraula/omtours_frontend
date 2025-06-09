@@ -59,7 +59,7 @@ function App(): JSX.Element {
       <Route path="*" element={<ErrorPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/accout" element={<Account />} />
+      <Route path="/account" element={<Account />} />
     </Routes>
   );
 }
@@ -268,7 +268,7 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       </div>
       {/* Avatar + Username */}
       <div className="flex flex-col items-center">
-        <a href="/accout"> <img
+        <a href="/account"> <img
           src={user.image}
           alt="User Avatar"
           className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
