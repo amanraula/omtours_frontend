@@ -25,7 +25,7 @@ interface TravelPlan {
   itinerary: string;
   additional: string;
 }
-
+let check=false;
 const PlanningForm: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -65,21 +65,7 @@ const PlanningForm: React.FC = () => {
     'No Preferences',
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      // const response = await axios.post('http://localhost:8000/plan', formData);
-      const response = await axios.post('https://omtours-be.onrender.com/plan', formData);
-      console.log('Success:', response.data);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
-
-    navigate('/tour');
-  };
+  
 
   const handleLocationPreferenceChange = (location: string) => {
     setFormData(prev => ({
@@ -113,8 +99,30 @@ const { user,authCheck,logout} = useAuthStore();
           authCheck();
         }, [authCheck]);
 let name = "Guest";//null
-if (user) { name=user.username;} 
+if (user) { name=user.username;check=true; } 
+const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    if(user){
+      console.log("Data Sent to Database");
+      await axios.get(`https://omtours-be.onrender.com/search/${formData.source}`);
+      await axios.get(`https://omtours-be.onrender.com/search/${formData.destination}`);
+  }
+    try {
+      // const response = await axios.post('http://localhost:8000/plan', formData);
+      const response = await axios.post('https://omtours-be.onrender.com/plan', formData);
+    
+
+      console.log('Success:', response.data);
+    } catch (error) { 
+      console.error('Error submitting form:', error);
+    }
+
+    navigate('/tour');
+  };
   return (
+    
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       {/* Top-right controls */}
     <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
