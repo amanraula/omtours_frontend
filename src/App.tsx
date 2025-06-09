@@ -9,7 +9,7 @@ import TourPage from './pages/TourPage';
 import { useAuthStore } from './store/authUser';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
-
+import Account from './pages/Account';
 interface Categories {
   category: string;
   image: string;
@@ -59,6 +59,7 @@ function App(): JSX.Element {
       <Route path="*" element={<ErrorPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/accout" element={<Account />} />
     </Routes>
   );
 }
@@ -267,12 +268,12 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
       </div>
       {/* Avatar + Username */}
       <div className="flex flex-col items-center">
-        <img
+        <a href="/accout"> <img
           src={user.image}
           alt="User Avatar"
           className="w-14 h-14 rounded-full cursor-pointer hover:opacity-80 transition-opacity"
           title="Account"
-        />
+        /></a>
       </div>
 
       {/* Logout Button */}
