@@ -25,7 +25,7 @@ interface TravelPlan {
   itinerary: string;
   additional: string;
 }
-let check=false;
+
 const PlanningForm: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -99,7 +99,7 @@ const { user,authCheck,logout} = useAuthStore();
           authCheck();
         }, [authCheck]);
 let name = "Guest";//null
-if (user) { name=user.username;check=true; } 
+if (user) { name=user.username;} 
 const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
