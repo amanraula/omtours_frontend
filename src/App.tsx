@@ -208,7 +208,14 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             </div>
           );
         }
- 
+ // Place this in your component
+const handleExploreClick = () => {
+  const nextSection = document.getElementById('next-section');
+  if (nextSection) {
+    nextSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white">
       {/* Hero Section */}
@@ -243,14 +250,21 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
             Plan Your Adventure
           </button>
         </div>
-        <div className="absolute   bottom-4 text-blue-300 right-4 z-50 flex items-center gap-6">
-          <img
-          src="/explore.png"
-          alt="Explore"
-          className="w-25 h-19 "
-          title="Explore More"
-        />
-        </div>
+        <div className="absolute bottom-4 right-4 z-50 flex items-center gap-6">
+  <button
+    onClick={handleExploreClick}
+    className="bg-gradient-to-br rounded-2xl shadow-xl p-3 hover:scale-110 hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-900"
+    title="Explore More"
+    aria-label="Explore More"
+  >
+    <img
+      src="/explore.png"
+      alt="Explore"
+      className="w-20 h-20"
+    />
+  </button>
+</div>
+
       </header>
     {/* Top-right controls */}
     <div className="absolute top-4 right-4 z-50 flex items-center gap-6">
@@ -290,23 +304,23 @@ function HomePage({ navigate }: HomePageProps): JSX.Element {
     <>
       
       <a
-        href="/signup"
-        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
-      >
-        Sign Up
-      </a>
-      <a
-        href="/login"
-        className="text-green-400 font-bold text-lg cursor-pointer hover:text-yellow-800 transition-colors"
-      >
-        LogIn
-      </a>
+  href="/signup"
+  className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 font-bold text-lg rounded-full px-8 py-3 shadow-lg transition-all transform hover:scale-105"
+>
+  Sign Up
+</a>
+<a
+  href="/login"
+  className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold text-lg rounded-full px-8 py-3 shadow-lg transition-all transform hover:scale-105"
+>
+  Log In
+</a>
     </>
   )}
 </div>
 
       {/* International Destinations Section */}
-      <section className="py-20 px-4 relative">
+      <section className="py-20 px-4 relative" id="next-section">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">
             Top Places Outside India
