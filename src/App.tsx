@@ -1,15 +1,22 @@
-import React, { JSX, useRef } from 'react';
+import React, { JSX, useRef,lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, NavigateFunction } from 'react-router-dom';
 import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Map, Calendar, RefreshCw, Quote, MapPin } from 'lucide-react';
-import PlanningForm from './pages/PlanningForm';
-import LocationView from './pages/LocationView';
-import ErrorPage from './pages/ErrorPage';
-import TourPage from './pages/TourPage';
+// import PlanningForm from './pages/PlanningForm';
+// import LocationView from './pages/LocationView';
+// import ErrorPage from './pages/ErrorPage';
+// import TourPage from './pages/TourPage';
 
 import { useAuthStore } from './store/authUser';
-import SignUpPage from './pages/SignUpPage';
-import LoginPage from './pages/LoginPage';
-import Account from './pages/Account';
+// import SignUpPage from './pages/SignUpPage';
+// import LoginPage from './pages/LoginPage';
+// import Account from './pages/Account';
+const PlanningForm = lazy(() => import('./pages/PlanningForm'));
+const LocationView = lazy(() => import('./pages/LocationView'));
+const ErrorPage = lazy(() => import('./pages/ErrorPage'));
+const TourPage = lazy(() => import('./pages/TourPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const Account = lazy(() => import('./pages/Account'));
 interface Categories {
   category: string;
   image: string;
@@ -51,6 +58,7 @@ function App(): JSX.Element {
   const navigate = useNavigate();
 
   return (
+    <Suspense fallback={<div className="min-h-screen bg-indigo-950 flex items-center justify-center">Loading...</div>}>
     <Routes>
       <Route path="/" element={<HomePage navigate={navigate} />} />
       <Route path="/plan" element={<PlanningForm />} />
@@ -61,6 +69,7 @@ function App(): JSX.Element {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/account" element={<Account />} />
     </Routes>
+    </Suspense>
   );
 }
 
