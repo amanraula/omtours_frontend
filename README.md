@@ -61,20 +61,20 @@ It’s responsive, secure, and designed for **fast iterations** and **clean stru
 omtours_frontend/
 ├── public/
 ├── src/
-│ ├── components/
-│ │ └── Footer.tsx
-│ ├── pages/
-│ │ ├── home/
-│ │ │ └── HomePage.tsx
-│ │ ├── LoginPage.tsx
-│ │ ├── SignUpPage.tsx
-│ │ ├── WatchPage.tsx
-│ │ ├── SearchPage.tsx
-│ │ └── SearchHistoryPage.tsx
-│ ├── store/
-│ │ └── authUser.ts
-│ ├── App.tsx
-│ └── index.html
+│   ├── components/
+│   │   └── Footer.tsx
+│   ├── pages/
+│   │   ├── home/
+│   │   │   └── HomePage.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── SignUpPage.tsx
+│   │   ├── WatchPage.tsx
+│   │   ├── SearchPage.tsx
+│   │   └── SearchHistoryPage.tsx
+│   ├── store/
+│   │   └── authUser.ts
+│   ├── App.tsx
+│   └── index.html
 ├── package.json
 ├── vite.config.ts
 └── README.md
