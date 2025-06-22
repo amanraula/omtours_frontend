@@ -1,7 +1,7 @@
 # 🌍 Om Tours Frontend
 
 A modern, blazing-fast ✈️ **React + TypeScript** frontend for the **Om Tours** travel platform.  
-🌐 **Live Preview**: [omtours-theta.vercel.app](https://omtours-theta.vercel.app)
+🌐 **Live**
 
 ---
 
