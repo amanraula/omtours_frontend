@@ -5,7 +5,7 @@ import { Globe2, ChevronLeft, ChevronRight, Star, MessageSquareText, Sliders, Ma
 // import LocationView from './pages/LocationView';
 // import ErrorPage from './pages/ErrorPage';
 // import TourPage from './pages/TourPage';
-
+// bug fix
 import { useAuthStore } from './store/authUser';
 // import SignUpPage from './pages/SignUpPage';
 // import LoginPage from './pages/LoginPage';
